@@ -7,6 +7,9 @@ import { CurrencyExchangerComponent } from './components/currency-exchanger/curr
 import { PopularCurrenciesComponent } from './components/shared/popular-currencies/popular-currencies.component';
 import { NavBarComponent } from './components/shared/nav-bar/nav-bar.component';
 import { HistoricalRateChartComponent } from './components/historical-rate-chart/historical-rate-chart.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,15 @@ import { HistoricalRateChartComponent } from './components/historical-rate-chart
     NavBarComponent,
     HistoricalRateChartComponent
   ],
+  exports: [CurrencyExchangerComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    NgSelectModule,
+    FormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

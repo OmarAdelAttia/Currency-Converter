@@ -1,17 +1,48 @@
-<div class="">
-    <div class="">
-        <input type="text" class="amount" placeholder="0.00" />
-        <input type="text" placeholder="0.00" />
-        <input type="text" placeholder="0.00" />
+<div class="currency-exchanger--container">
+    <div class="title-container">
+        <h2 class="title">Currency Exchanger</h2>
     </div>
-
-    <div class="">
-        <button (click)="convertCurrency()">Convert</button>
+    <div class="data-container">
+        <div class="data-entry">
+            <div class="amount-exchange">
+                <label for="amount">Amount</label>
+                <input type="text" class="amount" [(ngModel)]="currenciesModel.amount" placeholder="0.00" />
+            </div>
+            <div class="from-currency">
+                <label for="from">From</label>
+                <ng-select [items]="currencies" bindLabel="key" bindValue="key" [searchable]="true" [multiple]="false"
+                    [clearable]="true" [(ngModel)]="currenciesModel.fromCurrency"></ng-select>
+            </div>
+            <div class="to-currency">
+                <label for="to">To</label>
+                <ng-select [items]="currencies" bindLabel="key" bindValue="key" [searchable]="true" [multiple]="false"
+                    [clearable]="true" [(ngModel)]="currenciesModel.toCurrency"></ng-select>
+            </div>
+        </div>
+        <div class="convert-btn__container">
+            <button type="button" (click)="convertCurrency()" [disabled]="!currenciesModel.amount">
+                Convert
+            </button>
+        </div>
+        <div class="data-output">
+            <div class="default-exchange">
+                <input type="text" name="defaultValue" [(ngModel)]="currenciesModel.defaultValue" disabled />
+            </div>
+            <div class="amount-exchange">
+                <input type="text" name="valueWithAmount" [(ngModel)]="currenciesModel.valueWithAmount" disabled />
+            </div>
+            <div class="more-details__btn">
+                <button type="button" routerLink="/currencyDetails" [disabled]="!currenciesModel.amount">
+                    More Details
+                </button>
+            </div>
+        </div>
     </div>
-
-    <div class="">
-        <input type="text" class="amount" placeholder="0.00" />
-        <input type="text" placeholder="0.00" />
-        <button>More Details</button>
+    <div class="dashboard">
+        <div class="dashboard-container" *ngFor="let item of currenciesDashboardList; index as i">
+            <div class="dashboard-container_value">
+                <h3 class="dashboard_value">{{ item }}</h3>
+            </div>
+        </div>
     </div>
 </div>
