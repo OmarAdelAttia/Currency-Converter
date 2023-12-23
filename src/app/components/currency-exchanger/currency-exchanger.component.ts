@@ -100,4 +100,9 @@ export class CurrencyExchangerComponent implements OnInit {
     this.getCurrencySrv.symbol = this.currenciesModel.toCurrency;
   }
 
+  sawpBtn() {
+    [this.currenciesModel.fromCurrency, this.currenciesModel.toCurrency] = [this.currenciesModel.toCurrency, this.currenciesModel.fromCurrency];
+    this.convertCurrency();
+  }
+
 }

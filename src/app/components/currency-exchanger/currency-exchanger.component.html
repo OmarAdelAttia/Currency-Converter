@@ -20,6 +20,9 @@
             </div>
         </div>
         <div class="convert-btn__container">
+            <button type="button" (click)="sawpBtn()" [disabled]="!currenciesModel.amount">
+                Swap
+            </button>
             <button type="button" (click)="convertCurrency()" [disabled]="!currenciesModel.amount">
                 Convert
             </button>

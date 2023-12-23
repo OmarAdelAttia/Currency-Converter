@@ -27,8 +27,10 @@
         .convert-btn__container{
             margin: .5rem;
             display: grid;
+            column-gap: .5rem;
+            grid-template-columns: calc(100%/3) calc(100%*2/3);
             button {
-                min-width: calc(100%/1.5);
+                min-width: calc(100%/1);
                 justify-self: end;
             }
         }
