@@ -3,7 +3,9 @@
         <img src="../../../../assets/imgs/logo.png" alt="logo" srcset="">
     </div>
     <div class="btns">
-        <button type="button" class="currency-details">EUR-USD Details</button>
-        <button type="button" class="currency-details">EUR-GBP Details</button>
+        <button type="button" class="currency-details" routerLink="/currencyDetails"
+            (click)="currencyDetails('USD')">EUR-USD Details</button>
+        <button type="button" class="currency-details" routerLink="/currencyDetails"
+            (click)="currencyDetails('GBP')">EUR-GBP Details</button>
     </div>
 </div>

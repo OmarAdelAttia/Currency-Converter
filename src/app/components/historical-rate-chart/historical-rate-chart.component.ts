@@ -17,17 +17,17 @@ export class HistoricalRateChartComponent implements OnInit {
   constructor(private getCurrencySrv: CurrencyService) { }
 
   ngOnInit(): void {
-
     // setting data from the service
     this.currenciesModel.amount = this.getCurrencySrv.amount;
     this.currenciesModel.toCurrency = this.getCurrencySrv.symbol;
     this.currenciesModel.fromCurrency = this.getCurrencySrv.base;
 
+    // getting the title (the API not working)
     this.getCurrencySrv.getFullCurrencyName().subscribe(data => {
-      console.log(data)
-      this.title = Object.values(data.symbols)
-    })
+      this.title = Object.values(data.symbols)[0];
+    });
 
+    // getting the currencies
     this.getCurrencySrv.getCurrencies().subscribe(data => {
       this.currencies = Object.entries(data.rates).map(([key, value]) => ({ key, value }));
     });
