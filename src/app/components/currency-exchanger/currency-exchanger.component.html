@@ -32,7 +32,8 @@
                 <input type="text" name="valueWithAmount" [(ngModel)]="currenciesModel.valueWithAmount" disabled />
             </div>
             <div class="more-details__btn">
-                <button type="button" routerLink="/currencyDetails" [disabled]="!currenciesModel.amount">
+                <button type="button" routerLink="/currencyDetails" (click)="getDetails()"
+                    [disabled]="!currenciesModel.amount">
                     More Details
                 </button>
             </div>

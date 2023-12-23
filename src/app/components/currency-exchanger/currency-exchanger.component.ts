@@ -22,32 +22,28 @@ export class CurrencyExchangerComponent implements OnInit {
   ngOnInit(): void {
     this.currenciesModel.toCurrency = 'USD';
     this.currenciesModel.fromCurrency = 'EUR';
-    this.settingData();
+    this.convertCurrency();
   }
 
   convertCurrency() {
-    this.settingData();
-  }
-
-  settingData() {
-    let approximatingValue: number = 1;
+    let approximatingNumber: number = 1;
     this.getCurrencySrv.getCurrencies().subscribe(data => {
       this.currencies = Object.entries(data.rates).map(([key, value]) => ({ key, value }));
 
       // decalaring the variables
       if (!this.currenciesModel.amount) this.currenciesModel.amount = 1;
 
-      let convertedToValue = this.gettingToCurrency();
+      let convertedToValue = this.gettingCurrency('convertTo');
 
-      let convertedFromValue = this.gettingFromCurrency();
+      let convertedFromValue = this.gettingCurrency('convertFrom');
 
-      if (convertedFromValue.value !== 1) approximatingValue = 1 / convertedFromValue.value;
+      if (convertedFromValue.value !== 1) approximatingNumber = 1 / convertedFromValue.value;
 
       // setting default values
-      this.currenciesModel.defaultValue = `${approximatingValue * convertedFromValue.value} ${this.currenciesModel.fromCurrency} = ${(convertedToValue.value * approximatingValue).toFixed(2)} ${this.currenciesModel.toCurrency}`;
+      this.currenciesModel.defaultValue = `${approximatingNumber * convertedFromValue.value} ${this.currenciesModel.fromCurrency} = ${(convertedToValue.value * approximatingNumber).toFixed(2)} ${this.currenciesModel.toCurrency}`;
 
       // setting value with amount after converting
-      this.currenciesModel.valueWithAmount = `${(convertedToValue.value * this.currenciesModel.amount * approximatingValue).toFixed(2)} ${this.currenciesModel.toCurrency}`;
+      this.currenciesModel.valueWithAmount = `${(convertedToValue.value * this.currenciesModel.amount * approximatingNumber).toFixed(2)} ${this.currenciesModel.toCurrency}`;
 
       this.clearingDashboard();
 
@@ -57,19 +53,20 @@ export class CurrencyExchangerComponent implements OnInit {
     });
   }
 
-  gettingToCurrency() {
-    // getting toCurrency
-    let calculatedValue = this.currencies.find((element: { key: string; value: any; }) => {
-      if (element.key === this.currenciesModel.toCurrency) return element.value
-    });
-    return calculatedValue;
-  }
-
-  gettingFromCurrency() {
-    // getting fromCurrency
-    let calculatedValue = this.currencies.find((element: { key: string; value: any; }) => {
-      if (element.key === this.currenciesModel.fromCurrency) return element.value
-    });
+  gettingCurrency(type: string) {
+    let calculatedValue;
+    if (type === 'convertTo') {
+      // getting toCurrency
+      calculatedValue = this.currencies.find((element: { key: string; value: any; }) => {
+        if (element.key === this.currenciesModel.toCurrency) return element.value
+      });
+    }
+    if (type === 'convertFrom') {
+      // getting fromCurrency
+      calculatedValue = this.currencies.find((element: { key: string; value: any; }) => {
+        if (element.key === this.currenciesModel.fromCurrency) return element.value
+      });
+    }
     return calculatedValue;
   }
 
@@ -95,6 +92,12 @@ export class CurrencyExchangerComponent implements OnInit {
       element.value = (element.value * this.currenciesModel.amount * calculatedValue.value);
       return element = `${this.currenciesModel.amount} ${element.key} = ${element.value.toFixed(2)} ${this.currenciesModel.toCurrency}`
     });
+  }
+
+  getDetails() {
+    this.getCurrencySrv.amount = this.currenciesModel.amount;
+    this.getCurrencySrv.base = this.currenciesModel.fromCurrency;
+    this.getCurrencySrv.symbol = this.currenciesModel.toCurrency;
   }
 
 }

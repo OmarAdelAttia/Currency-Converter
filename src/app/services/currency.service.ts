@@ -5,7 +5,12 @@ import { HttpClient } from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
+
 export class CurrencyService {
+
+  base: any;
+  symbol: any;
+  amount: any;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -13,8 +18,12 @@ export class CurrencyService {
     return this.httpClient.get('http://data.fixer.io/api/latest?access_key=b5b9bfad8776295669f117e5775136ae');
   }
 
-  getHistoricalRate(date: any, base: any, symbols: any): Observable<any> {
+  getHistoricalRate(date: any, base: any = this.base, symbols: any = this.symbol): Observable<any> {
     return this.httpClient.get(`http://data.fixer.io/api/${date}?access_key=b5b9bfad8776295669f117e5775136ae&base=${base}&symbols=${symbols}`);
+  }
+
+  getFullCurrencyName(): Observable<any> {
+    return this.httpClient.get(`http://data.fixer.io/api/${this.base}?access_key=b5b9bfad8776295669f117e5775136ae`);
   }
 
 }

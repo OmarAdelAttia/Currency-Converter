@@ -1,6 +1,6 @@
 <div class="historical-rate-container">
     <div class="title-container">
-        <h2 class="title">Currency Details</h2>
+        <h2 class="title">{{title}}</h2>
         <button type="button" routerLink="">Back to Home</button>
     </div>
     <div class="data-container">
@@ -12,7 +12,7 @@
             <div class="from-currency">
                 <label for="from">From</label>
                 <ng-select [items]="currencies" bindLabel="key" bindValue="key" [searchable]="true" [multiple]="false"
-                    [clearable]="true" [(ngModel)]="currenciesModel.fromCurrency"></ng-select>
+                    [clearable]="true" [(ngModel)]="currenciesModel.fromCurrency" disabled></ng-select>
             </div>
             <div class="to-currency">
                 <label for="to">To</label>
