@@ -48,6 +48,7 @@ export class HistoricalRateChartComponent implements OnInit {
 
     let time = this.getTodayTime();
 
+    // get historical rate (API ristricted)
     this.getCurrencySrv.getHistoricalRate(time, this.currenciesModel.fromCurrency, this.currenciesModel.toCurrency).subscribe(data => {
       // console.log(data);
 

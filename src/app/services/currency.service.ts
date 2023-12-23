@@ -15,15 +15,15 @@ export class CurrencyService {
   constructor(private httpClient: HttpClient) { }
 
   getCurrencies(): Observable<any> {
-    return this.httpClient.get('http://data.fixer.io/api/latest?access_key=b5b9bfad8776295669f117e5775136ae');
+    return this.httpClient.get('http://data.fixer.io/api/latest?access_key=78e8eae33d8c606822dfe0e1a558caf3');
   }
 
   getHistoricalRate(date: any, base: any = this.base, symbols: any = this.symbol): Observable<any> {
-    return this.httpClient.get(`http://data.fixer.io/api/${date}?access_key=b5b9bfad8776295669f117e5775136ae&base=${base}&symbols=${symbols}`);
+    return this.httpClient.get(`http://data.fixer.io/api/${date}?access_key=78e8eae33d8c606822dfe0e1a558caf3&base=${base}&symbols=${symbols}`);
   }
 
   getFullCurrencyName(): Observable<any> {
-    return this.httpClient.get(`http://data.fixer.io/api/${this.base}?access_key=b5b9bfad8776295669f117e5775136ae`);
+    return this.httpClient.get(`http://data.fixer.io/api/${this.base}?access_key=78e8eae33d8c606822dfe0e1a558caf3`);
   }
 
 }

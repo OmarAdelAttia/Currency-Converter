@@ -6,7 +6,8 @@
         <div class="data-entry">
             <div class="amount-exchange">
                 <label for="amount">Amount</label>
-                <input type="text" class="amount" [(ngModel)]="currenciesModel.amount" placeholder="0.00" />
+                <input class="amount" name="amount" [(ngModel)]="currenciesModel.amount" placeholder="0.00"
+                    type="number" />
             </div>
             <div class="from-currency">
                 <label for="from">From</label>
