@@ -22,14 +22,14 @@ export class CurrencyExchangerComponent implements OnInit {
   ngOnInit(): void {
     this.currenciesModel.toCurrency = 'USD';
     this.currenciesModel.fromCurrency = 'EUR';
-    this.getDefaultStatus();
+    this.settingData();
   }
 
   convertCurrency() {
-    this.getDefaultStatus();
+    this.settingData();
   }
 
-  getDefaultStatus() {
+  settingData() {
     let approximatingValue: number = 1;
     this.getCurrencySrv.getCurrencies().subscribe(data => {
       this.currencies = Object.entries(data.rates).map(([key, value]) => ({ key, value }));
